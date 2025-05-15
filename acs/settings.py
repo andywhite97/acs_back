@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +26,25 @@ SECRET_KEY = 'django-insecure-$21t79)$0!2(tfc%b)7%pqk(#+tyg6gsn$c8)@sayh20b##g7r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG is False:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
 
+    ALLOWED_HOSTS = ['https://acs-back.onrender.com']
+
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_SSL_REDIRECT = False
+
+    ALLOWED_HOSTS = []
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'eshopsz',
+    'API_KEY': '249699638386646',
+    'API_SECRET': '5sxbsJLBr8TzmyEMg7UZ2p7XUvg'
+}
 
 # Application definition
 
@@ -89,13 +107,24 @@ WSGI_APPLICATION = 'acs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'acs_db_9jgr',
+        'USER': 'acs_db_9jgr_user',
+        'PASSWORD': 'SX5RHIHl23KnsZqXWvhU0489ykmCMFeo',
+        'HOST': 'dpg-d0j3ltemcj7s73ajuaq0-a',
+        'PORT': '5432'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -131,7 +160,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+
+if DEBUG is True:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -142,5 +179,5 @@ if DEBUG is True:
     CORS_ALLOW_ALL_ORIGINS = True
     CORS_ALLOW_HEADERS = ['*']
 else:
-    CORS_ORIGIN_WHITELIST = ['https://eshopsz.herokuapp.com', 'http://localhost:4200', 'http://eshopsz.online']
+    CORS_ORIGIN_WHITELIST = ['https://acs-back.onrender.com']
     CORS_ALLOW_HEADERS = ['*']

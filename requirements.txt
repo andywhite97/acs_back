@@ -1,5 +1,9 @@
 asgiref==3.8.1
+certifi==2025.4.26
+charset-normalizer==3.4.2
+cloudinary==1.44.0
 Django==5.1.6
+django-cloudinary-storage==0.3.0
 django-cors-headers==4.7.0
 django-indexer==0.3.0
 django-paging==0.2.5
@@ -12,11 +16,16 @@ dnspython==2.7.0
 eventlet==0.39.0
 greenlet==3.1.1
 gunicorn==23.0.0
+idna==3.10
 lockfile==0.12.2
 packaging==25.0
 pillow==11.1.0
 python-daemon==3.1.2
 raven==6.10.0
+requests==2.32.3
+six==1.17.0
 South==1.0.2
 sqlparse==0.5.3
 tzdata==2025.1
+urllib3==2.4.0
+whitenoise==6.9.0
