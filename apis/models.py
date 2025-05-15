@@ -39,6 +39,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     details = models.TextField()
     price = models.IntegerField(default=0)
+    discounted_price = models.IntegerField(default=0)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE)
     condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
