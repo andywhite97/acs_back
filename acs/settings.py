@@ -33,7 +33,7 @@ if DEBUG is False:
     CSRF_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
 
-    ALLOWED_HOSTS = ['https://acs-back.onrender.com']
+    ALLOWED_HOSTS = ['acs-back.onrender.com']
 
 else:
     SESSION_COOKIE_SECURE = False
