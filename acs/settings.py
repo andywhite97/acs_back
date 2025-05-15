@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -121,10 +123,26 @@ else:
         'NAME': 'acs_db_9jgr',
         'USER': 'acs_db_9jgr_user',
         'PASSWORD': 'SX5RHIHl23KnsZqXWvhU0489ykmCMFeo',
-        'HOST': 'dpg-d0j3ltemcj7s73ajuaq0-a',
+        'HOST': 'oregon-postgres.render.com',
         'PORT': '5432'
         }
     }
+
+    sentry_sdk.init(
+    dsn="https://09e3fbce3c1545d29a40c7700799e1f5@o747001.ingest.sentry.io/4505210512539648",
+    integrations=[
+        DjangoIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
