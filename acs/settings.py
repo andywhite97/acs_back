@@ -199,5 +199,5 @@ if DEBUG is True:
     CORS_ALLOW_ALL_ORIGINS = True
     CORS_ALLOW_HEADERS = ['*']
 else:
-    CORS_ORIGIN_WHITELIST = ['https://acs-back.onrender.com']
+    CORS_ORIGIN_WHITELIST = ['https://acs-back.onrender.com', 'https://andywhite97.github.io/acs', 'http://localhost:4200']
     CORS_ALLOW_HEADERS = ['*']
