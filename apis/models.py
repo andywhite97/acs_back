@@ -35,7 +35,8 @@ class Condition(models.Model):
         return self.name
 
 class Product(models.Model):
-    image = ResizedImageField(size=[1080, 1080], crop=['middle', 'center'], upload_to=product_upload)
+    image = ResizedImageField(size=[1080, 1080], crop=['middle', 'center'], upload_to=product_upload, null=True, blank=True)
+    image_link = models.URLField(blank=True, null=True)
     name = models.CharField(max_length=250)
     details = models.TextField()
     price = models.IntegerField(default=0)
